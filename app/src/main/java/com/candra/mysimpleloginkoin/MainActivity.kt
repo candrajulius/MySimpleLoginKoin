@@ -4,14 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.candra.mysimpleloginkoin.databinding.ActivityMainBinding
-import org.koin.android.ext.android.inject
+import com.candra.mysimpleloginkoin.di.MyApplication
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    val userRepository: UserRepository by inject()
+
+    @Inject
+    lateinit var userRepository: UserRepository
+
+    @Inject
+    lateinit var userRepository2: UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -21,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             saveSession()
         }
+        userRepository.checkInstance()
+        userRepository2.checkInstance()
     }
 
     private fun saveSession() {
@@ -33,3 +42,6 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 }
+/*
+Sudah tidak ada lagi kode untuk inisialisasi Objek di sini. Anda cukup menambahkan Annotation @Inject pada field yang ingin di-inject. Keren kan! Jangan lupa untuk meng-inject component sebelum super.onCreate terlebih dahulu.
+ */

@@ -1,17 +1,12 @@
 package com.candra.mysimpleloginkoin
 
-class UserRepository(private val sesi: SessionManager)
+import android.util.Log
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class UserRepository @Inject constructor(private val sesi: SessionManager)
 {
-    companion object{
-        @Volatile
-        private var instance: UserRepository? = null
-
-        fun getInstance(sesi: SessionManager): UserRepository =
-            instance ?: synchronized(this){
-                instance ?: UserRepository(sesi)
-            }
-    }
-
     fun getUser() = sesi.getFromPreference(SessionManager.KEY_USERNAME)
 
     fun isUserLogin() = sesi.isLogin
@@ -22,4 +17,15 @@ class UserRepository(private val sesi: SessionManager)
     }
 
     fun logoutUser() = sesi.logout()
+
+    fun checkInstance() = Log.d("Singleton", "checkInstance: $this")
 }
+
+/*
+Kesimpulan
+Karena UserRepository hanya membutuhkan SessionManager — dan ingat bahwa SessionManager sudah kita provide di dalam module —, maka Anda dapat menggunakan Injection pada constructor. Caranya yaitu dengan menambahkan @Inject constructor. Jika tidak ditambahkan, maka akan muncul eror MissingBinding UserRepository.
+
+Sudah tidak ada lagi fungsi getInstance. Anda cukup menambahkan annotation @Singleton.
+
+Jangan lupa untuk menambahkan annotation @Singleton pada Component juga.
+ */
