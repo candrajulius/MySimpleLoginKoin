@@ -1,7 +1,7 @@
 package com.candra.mysimpleloginkoin.di
 
 import android.content.Context
-import com.candra.mysimpleloginkoin.SessionManager
+import com.candra.core.SessionManager
 import dagger.Module
 import dagger.Provides
 

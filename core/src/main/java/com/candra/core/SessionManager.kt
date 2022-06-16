@@ -1,4 +1,4 @@
-package com.candra.mysimpleloginkoin
+package com.candra.core
 
 import android.content.Context
 import android.content.SharedPreferences

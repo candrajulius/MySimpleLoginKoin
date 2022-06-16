@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.candra.core.UserRepository
 import com.candra.mysimpleloginkoin.databinding.HomeActivityBinding
 import com.candra.mysimpleloginkoin.di.MyApplication
 import javax.inject.Inject

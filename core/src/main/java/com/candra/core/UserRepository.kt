@@ -1,4 +1,4 @@
-package com.candra.mysimpleloginkoin
+package com.candra.core
 
 import android.util.Log
 import javax.inject.Inject
